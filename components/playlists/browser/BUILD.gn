@@ -1,0 +1,25 @@
+source_set("browser") {
+  sources = [
+    "playlists_controller.cc",
+    "playlists_controller.h",
+    "playlists_controller_observer.h",
+    "playlists_database.cc",
+    "playlists_database.h",
+    "playlists_download_manager.cc",
+    "playlists_download_manager.h",
+    "playlists_service.cc",
+    "playlists_service.h",
+    "playlists_service_factory.cc",
+    "playlists_service_factory.h",
+    "playlists_types.cc",
+    "playlists_types.h",
+  ]
+
+  deps = [
+    "//base",
+    "//components/keyed_service/content",
+    "//components/keyed_service/core",
+    "//content/public/browser",
+    "//extensions/browser",
+  ]
+}

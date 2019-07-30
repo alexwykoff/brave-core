@@ -1,0 +1,209 @@
+/* Copyright (c) 2019 The Brave Authors. All rights reserved.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+[
+  {
+    "namespace": "bravePlaylists",
+    "description": "Use the <code>chrome.bravePlaylists</code> API to get/set playlist",
+    "compiler_options": {
+      "implemented_in": "brave/browser/extensions/api/brave_playlists_api.h"
+    },
+    "events": [
+      {
+        "name": "onPlaylistsChanged",
+        "type": "function",
+        "description": "Fired when playlists is changed",
+        "parameters": [
+          {
+            "name": "changeType",
+            "type": "string",
+            "description": "Playlists change status(add, delete, abort, ready)"
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "description": "playlist id of added or deleted playlist"
+          }
+        ]
+      },
+      {
+        "name": "onInitialized",
+        "type": "function",
+        "description": "Fired when playlists backend is initialized",
+        "parameters": []
+      }
+    ],
+    "types": [
+      {
+        "id": "PlaylistInfo",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id for each playlist"
+          },
+          "playlistName": {
+            "type": "string",
+            "description": "Name for playlist"
+          },
+          "thumbnailPath": {
+            "type": "string",
+            "description": "thumbnail path for playlist"
+          },
+          "titles": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Title for each songs on this list"
+            }
+          },
+          "ready": {
+            "type": "boolean",
+            "description": "Whether this playlist can be played or not"
+          }
+        }
+      }
+    ],
+    "functions": [
+      {
+        "name": "isInitialized",
+        "type": "function",
+        "description": "For checking whether playlists backend are initialized",
+        "parameters": [
+          {
+            "type": "function",
+            "name": "callback",
+            "description": "If an error occurs, runtime.lastError is set to the error message.",
+            "parameters": [
+              {
+                "name": "initialized",
+                "type": "boolean"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "createPlaylist",
+        "type": "function",
+        "description": "create new playlist",
+        "parameters": [
+          {
+            "type": "object",
+            "name": "createParams",
+            "properties": {
+              "mediaFiles": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "Data for each media file in this playlist",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "Url for this media file"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Title for this media file"
+                    }
+                  }
+                }
+               },
+              "thumbnailUrl": {
+                "type": "string",
+                "description": "The url for thumbnail image for this playlists"
+              },
+              "playlistName": {
+                "type": "string",
+                "description": "Playlist name"
+              }
+            }
+          },
+          {
+            "type": "function",
+            "name": "callback",
+            "optional": true,
+            "description": "If an error occurs, runtime.lastError is set to the error message."
+          }
+        ]
+      },
+      {
+        "name": "getAllPlaylists",
+        "type": "function",
+        "description": "Get all playlists",
+        "parameters": [
+          {
+            "name": "callback",
+            "type": "function",
+            "description": "Function called when all playlists are fetched",
+            "parameters": [
+              {
+                "type": "array",
+                "name": "playlists",
+                "items": {
+                  "$ref": "PlaylistInfo",
+                  "description": "The list of playlist"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "getPlaylist",
+        "type": "function",
+        "description": "Get specific playlist",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string",
+            "description": "id for fetching a playlist"
+          },
+          {
+            "name": "callback",
+            "type": "function",
+            "parameters": [
+              {
+                "name": "playlist",
+                "$ref": "PlaylistInfo"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "deletePlaylist",
+        "type": "function",
+        "description": "Delete specific playlist and free all its data",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string",
+            "description": "id for deleting playlist"
+          },
+          {
+            "type": "function",
+            "name": "callback",
+            "optional": true,
+            "description": "If an error occurs, runtime.lastError is set to the error message."
+          }
+        ]
+      },
+      {
+        "name": "deleteAllPlaylists",
+        "type": "function",
+        "description": "Delete all playlists",
+        "parameters": [
+          {
+            "type": "function",
+            "name": "callback",
+            "optional": true,
+            "description": "If an error occurs, runtime.lastError is set to the error message."
+          }
+        ]
+      }
+    ]
+  }
+]
