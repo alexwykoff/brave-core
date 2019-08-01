@@ -4,9 +4,6 @@
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 #include "chrome/browser/profiles/pref_service_builder_utils.h"
-#define RegisterProfilePrefs RegisterProfilePrefs_ChromiumImpl
-#include "../../../../../chrome/browser/profiles/pref_service_builder_utils.cc"
-#undef RegisterProfilePrefs
 
 #include "brave/browser/brave_profile_prefs.h"
 #include "brave/browser/themes/brave_theme_service.h"
@@ -19,6 +16,10 @@
 #if BUILDFLAG(ENABLE_TOR)
 #include "brave/browser/tor/tor_profile_service.h"
 #endif
+
+#define RegisterProfilePrefs RegisterProfilePrefs_ChromiumImpl
+#include "../../../../../chrome/browser/profiles/pref_service_builder_utils.cc"
+#undef RegisterProfilePrefs
 
 // Prefs for KeyedService
 void RegisterProfilePrefs(bool is_signin_profile,
