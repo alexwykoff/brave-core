@@ -14,6 +14,9 @@ const char kEnabled[] = "brave.brave_ads.enabled";
 const char kAdsPerHour[] = "brave.brave_ads.ads_per_hour";
 const char kAdsPerDay[] = "brave.brave_ads.ads_per_day";
 
+const char kCheckReadyServeAdTimestamp[] =
+    "brave.brave_ads.check_ready_serve_ad_timestamp";
+
 const char kIdleThreshold[] = "brave.brave_ads.idle_threshold";
 
 const char kShouldShowFirstLaunchNotification[] =
